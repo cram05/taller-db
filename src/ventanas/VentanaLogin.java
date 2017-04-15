@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ventanas;
 
 import javax.swing.JOptionPane;
@@ -13,9 +9,6 @@ import javax.swing.JOptionPane;
  */
 public class VentanaLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaLogin
-     */
     public VentanaLogin() {
         initComponents();
     }
@@ -98,10 +91,9 @@ public class VentanaLogin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String user = jTextField1.getText();
         char[] pass = jPasswordField1.getPassword();
-        VerificadorUsuario verUser = new VerificadorUsuario();
-        boolean exito = verUser.comprobar(user, pass);
-        if(exito)
-            JOptionPane.showMessageDialog(null, "Bienvenido");
+        boolean existeUser = new VerificadorUsuario().comprobar(user, pass);
+        if(existeUser)
+            new VentanaSesion(this, false).setVisible(true);
         else
             JOptionPane.showMessageDialog(null, "Incorrecto");
     }//GEN-LAST:event_jButton1ActionPerformed

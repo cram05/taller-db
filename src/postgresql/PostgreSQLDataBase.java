@@ -11,8 +11,8 @@ import java.sql.Statement;
  * @author carlitos
  */
 public class PostgreSQLDataBase {
-    private static final String user = "cliente";
-    private static final String pass = "123456";
+    private static final String user = "postgres";
+    private static final String pass = "carlitos";
     private static final String url = "jdbc:postgresql://localhost:5432/tienda_online";
     
     public static Connection conectar(){
