@@ -1,4 +1,4 @@
-CREATE TABLE Cliente (
+﻿CREATE TABLE Cliente (
   idCliente INT NOT NULL,
   nombre VARCHAR(30) NULL,
   apellido VARCHAR(30) NULL,
@@ -17,16 +17,6 @@ CREATE TABLE Tipo_oferta (
   PRIMARY KEY(idTipo_oferta)
 );
 
-CREATE TABLE Extension (
-  nom_ext VARCHAR(5) NOT NULL,
-  Categoria_idCat INT NOT NULL,
-  PRIMARY KEY(nom_ext),
-  FOREIGN KEY(Categoria_idCat)
-    REFERENCES Categoria(idCat)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
-);
-
 CREATE TABLE Carrito (
   idCarrito INT NOT NULL,
   Cliente_idCliente INT NOT NULL,
@@ -37,17 +27,14 @@ CREATE TABLE Carrito (
       ON UPDATE NO ACTION
 );
 
-CREATE TABLE Producto (
-  id_prod INT NOT NULL,
-  Extension_nom_ext VARCHAR(5) NOT NULL,
-  nombre VARCHAR(30) NULL,
-  f_creac DATE NULL,
-  tam INT NULL,
-  PRIMARY KEY(id_prod),
-  FOREIGN KEY(Extension_nom_ext)
-    REFERENCES Extension(nom_ext)
-      ON DELETE SET NULL
-      ON UPDATE CASCADE
+CREATE TABLE Extension (
+  nom_ext VARCHAR(5) NOT NULL,
+  Categoria_idCat INT NOT NULL,
+  PRIMARY KEY(nom_ext),
+  FOREIGN KEY(Categoria_idCat)
+    REFERENCES Categoria(idCat)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
 );
 
 CREATE TABLE Factura (
@@ -58,6 +45,31 @@ CREATE TABLE Factura (
   PRIMARY KEY(idFactura, Carrito_idCarrito, Carrito_Cliente_idCliente),
   FOREIGN KEY(Carrito_idCarrito, Carrito_Cliente_idCliente)
     REFERENCES Carrito(idCarrito, Cliente_idCliente)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+);
+
+CREATE TABLE Producto (
+  id_prod INT NOT NULL,
+  Extension_nom_ext VARCHAR(5) NOT NULL,
+  f_creac DATE NULL,
+  tam INT NULL,
+  PRIMARY KEY(id_prod),
+  FOREIGN KEY(Extension_nom_ext)
+    REFERENCES Extension(nom_ext)
+      ON DELETE SET NULL
+      ON UPDATE CASCADE
+);
+
+CREATE TABLE Descripcion_Prod (
+  idDesc INTEGER NOT NULL,
+  Producto_id_prod INT NOT NULL,
+  titulo VARCHAR(20) NULL,
+  autor VARCHAR(30) NULL,
+  descripcion VARCHAR(200) NULL,
+  PRIMARY KEY(idDesc, Producto_id_prod),
+  FOREIGN KEY(Producto_id_prod)
+    REFERENCES Producto(id_prod)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 );

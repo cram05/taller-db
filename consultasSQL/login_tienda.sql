@@ -25,7 +25,7 @@ CREATE TABLE Usuario (
 );
 
 CREATE TABLE Sesion (
-  idSesion INT NOT NULL,
+  idSesion SERIAL NOT NULL,
   Usuario_idUser INT NOT NULL,
   PID INT NOT NULL,
   fec_ini DATE NULL,
